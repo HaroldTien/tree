@@ -12,7 +12,6 @@ class Node{
 		Node *llink;  
 		Node *rlink; 
 };
-//afasdfasf
 class Tree{
 	private:
 		//indicatot variable of direct to root
