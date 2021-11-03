@@ -20,12 +20,18 @@ class Tree{
 		Node *newNode;
 		//dirct to current code when serching the node for node for insert
 		Node *current;
-
+		Node *ptr;
+	
 	public:
+
 		Tree(){
 			root=NULL;
 			current=NULL;
-		}	
+			ptr=root;
+		}
+		Node *get_root(){
+			return root;
+		}
 		void insert_f(int input_data){
 			//instantiate a new node
 			newNode=new Node();
@@ -53,7 +59,6 @@ class Tree{
 						if(current->rlink==NULL){
 							// printf("b");
 							break;
-							
 						}
 						current=current->rlink;
 						// printf("\\ \n");
@@ -69,41 +74,43 @@ class Tree{
 				}
 			}
 		}
-		void display(){
-			//
-			if(current==NULL){
-				current=root;	
+		void display_f(Node *root){
+			if(root!=NULL){
+				printf("%d",root->num);
+				display_f(root->llink);
+				display_f(root->rlink);
 			}
-			if(current->llink!=NULL){
-				current=current->llink;
-			}else{
-				printf("%d",current->num);
-				// current=&current;
-				// display();
+		}
+		void display_f(){
+			display_f(get_root());
+		}
+		void delete_f(int delete_num,Node *root){
+			if(root==NULL){
+				if(root->num==delete_num){
+					if(root->llink==NULL&&root->rlink==NULL){
+						
+					}else{
+
+					}
+				}
+				display_f(root->llink);
+				display_f(root->rlink);
 			}
 			
 		}
+		void delete_f(int delete_num){
+			
+		}
+
 };
 int main(void){
 	Tree tree;
-	// int num;
-	// scanf("%d",&num);
 	tree.insert_f(14);
 	tree.insert_f(5);
 	tree.insert_f(7);
 	tree.insert_f(18);
-	// tree.display();
+	tree.display_f();
+
 
 }
-
-
-
-
-
-
-
-
-
-
-
 
