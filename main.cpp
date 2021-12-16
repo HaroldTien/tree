@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+#include <vector>
 using namespace std;   
 
 // creat a class of code
@@ -21,46 +22,15 @@ class Tree{
 		//dirct to current code when serching the node for node for insert
 		Node *current;
 		Node *ptr;
+		vector<int>each_node_in_tree; //for delete_f
 
-		// Node *Mininum_for_delet(Node *root){
-		// 	Node *ptr,*ptr2;
-		// 	ptr=root;
-		// 	while(ptr->llink!=NULL){ 
-		// 		if(ptr->llink->llink==NULL){
-		// 			ptr2=ptr->llink;
-		// 			ptr->llink=NULL;
-		// 			return ptr2;
-		// 		}
-		// 	}
-		// }
-
-		// Node *Maxnum_for_delet(Node *root){
-		// 	Node *ptr,*ptr2;
-		// 	ptr=root;
-		// 	while(ptr->rlink!=NULL){
-		// 		if(ptr->rlink->rlink==NULL){
-		// 			ptr2=ptr->rlink;
-		// 			ptr->rlink=NULL;
-		// 			return ptr2;
-		// 		}
-		// 	}
-			
-		// }
-
-		// void *push_back(Node *node){
-		// 	if(node!=NULL){
-		// 		insert_f(node->num);
-		// 		push_back(node->llink);
-		// 		push_back(node->rlink);
-		// 	}
-		// }
 		
 	public:
 		Tree(){
-
 			root=NULL;
 			current=NULL;
 			ptr=root;
+			tree_treval(root);
 		}
 		Node *get_root(){
 			return root;
@@ -93,10 +63,10 @@ class Tree{
 				}
 				if(newNode->num<=current->num){
 					current->llink=newNode;
-					printf("to left: %d\n",newNode->num);
+					// printf("to left: %d\n",newNode->num);
 				}else{
 					current->rlink=newNode;
-					printf("to right: %d\n",newNode->num);
+					// printf("to right: %d\n",newNode->num);
 				}
 			}
 		}
@@ -125,7 +95,6 @@ class Tree{
 				}
 			}
 		}
-
 		void delete_f(int delete_num){
 			Node *deleted_node=search_node(delete_num);//The node,where deleted_num in there.			
 			Node *prev,*prev_split,*replace_node;
@@ -156,27 +125,40 @@ class Tree{
 				prev_split->llink=NULL;
 			}
 			replace_node=prev;
+			cout<<"node"<<replace_node->num<<" replace node"<<deleted_node->num<<endl; 
+			deleted_node->num=replace_node->num;
 			
-			// cout<<prev_split->rlink<<endl;
-			
+			tree_treval(replace_node);
+			for(int i=1;i<each_node_in_tree.size();i++){
+				insert_f(each_node_in_tree[i]);
+				// cout<<replace_tree[i]<<" "<<endl;
+			}
+		}
 
-
+		void tree_treval(Node *root){
+			if(root!=NULL){
+				each_node_in_tree.push_back(root->num);
+				tree_treval(root->llink);
+				tree_treval(root->rlink);
+			}
 
 		}
 };
+
 int main(void){
 
 	Tree tree;
-	tree.insert_f(14);
-	tree.insert_f(5);
-	tree.insert_f(7);
-	tree.insert_f(18);
-	tree.insert_f(16);
-	tree.insert_f(15);
-	tree.insert_f(17);
+	tree.insert_f(20);
+	tree.insert_f(30);
+	tree.insert_f(35);
+	tree.insert_f(25);
+	tree.insert_f(29);
+	tree.insert_f(28);
+	tree.insert_f(26);
+	tree.insert_f(27);
 
-
-	tree.delete_f(18);
+	tree.delete_f(30);
+	tree.display_f();
 
 }
 
