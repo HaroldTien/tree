@@ -38,11 +38,11 @@ class Tree{
 
 		void insert_f(int input_data){
 			ptr=root;
-			newNode=new Node();
+			newNode=new Node();//the node that what i want to insert
 			newNode->rlink=NULL;
 			newNode->llink=NULL;
 			if(root==NULL){
-				newNode->num=input_data;	
+				newNode->num=input_data;
 				root=newNode;
 			}else{
 				current=root;
@@ -157,7 +157,7 @@ int main(void){
 	tree.insert_f(26);
 	tree.insert_f(27);
 
-	tree.delete_f(30);
+	// tree.delete_f(30);
 	tree.display_f();
 
 }
